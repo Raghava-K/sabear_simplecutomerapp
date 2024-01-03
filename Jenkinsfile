@@ -1,5 +1,5 @@
 pipeline {
-    agent any 
+    agent any
     tools {
         // Note: this should match with the tool name configured in your jenkins instance (JENKINS_URL/configureTools/)
         maven "MVN_HOME"
@@ -22,7 +22,7 @@ pipeline {
             steps {
                 script {
                     // Let's clone the source
-                    git 'https://github.com/betawins/spring3-mvc-maven-xml-hello-world-1.git';
+                    git 'https://github.com/betawins/sabear_simplecutomerapp.git';
                 }
             }
         }
@@ -55,7 +55,7 @@ pipeline {
                             protocol: NEXUS_PROTOCOL,
                             nexusUrl: NEXUS_URL,
 			    groupId: pom.groupId,
-                            version: '${BUILD_NUMBER}',
+                            version: pom.version,
                             repository: NEXUS_REPOSITORY,
                             credentialsId: NEXUS_CREDENTIAL_ID,
                             artifacts: [
