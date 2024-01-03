@@ -7,7 +7,7 @@ pipeline {
         NEXUS_VERSION = "nexus3"
         NEXUS_PROTOCOL = "http"
         NEXUS_URL = "47.128.76.190:8081"
-        NEXUS_REPOSITORY = "Simple-App"
+        NEXUS_REPOSITORY = "Parallel"
         NEXUS_CREDENTIAL_ID = "nexus-server"
     }
     stages {
