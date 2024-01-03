@@ -1,6 +1,3 @@
-
-pavan kumar
-  6:37 PM
 pipeline {
     agent any
     tools {
@@ -9,9 +6,9 @@ pipeline {
     environment {
         NEXUS_VERSION = "nexus3"
         NEXUS_PROTOCOL = "http"
-        NEXUS_URL = "100.25.2.101:8081"
-        NEXUS_REPOSITORY = "parallel"
-        NEXUS_CREDENTIAL_ID = "nexus"
+        NEXUS_URL = "47.128.76.190:8081"
+        NEXUS_REPOSITORY = "Simple-App"
+        NEXUS_CREDENTIAL_ID = "nexus-server"
     }
     stages {
         stage("Parallel Stages") {
