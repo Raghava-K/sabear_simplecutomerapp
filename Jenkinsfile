@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-        label "master"
-    }
+    agent any 
     tools {
         // Note: this should match with the tool name configured in your jenkins instance (JENKINS_URL/configureTools/)
         maven "MVN_HOME"
@@ -13,18 +11,18 @@ pipeline {
         // This can be http or https
         NEXUS_PROTOCOL = "http"
         // Where your Nexus is running
-        NEXUS_URL = "18.216.151.197:8081/"
+        NEXUS_URL = "47.128.76.190:8081"
         // Repository where we will upload the artifact
-        NEXUS_REPOSITORY = "soanrqube"
+        NEXUS_REPOSITORY = "D-pipeline"
         // Jenkins credential id to authenticate to Nexus OSS
-        NEXUS_CREDENTIAL_ID = "nexus_keygen"
+        NEXUS_CREDENTIAL_ID = "nexus-server"
     }
     stages {
         stage("clone code") {
             steps {
                 script {
                     // Let's clone the source
-                    git 'https://github.com/betawins/sabear_simplecutomerapp.git';
+                    git 'https://github.com/betawins/spring3-mvc-maven-xml-hello-world-1.git';
                 }
             }
         }
@@ -51,13 +49,13 @@ pipeline {
                     // Assign to a boolean response verifying If the artifact name exists
                     artifactExists = fileExists artifactPath;
                     if(artifactExists) {
-                        echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
+                        echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version $BUILD_NUMBER}";
                         nexusArtifactUploader(
                             nexusVersion: NEXUS_VERSION,
                             protocol: NEXUS_PROTOCOL,
                             nexusUrl: NEXUS_URL,
 			    groupId: pom.groupId,
-                            version: pom.version,
+                            version: '${BUILD_NUMBER}',
                             repository: NEXUS_REPOSITORY,
                             credentialsId: NEXUS_CREDENTIAL_ID,
                             artifacts: [
